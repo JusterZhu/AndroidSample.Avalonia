@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.IntentView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="13. 应用间数据传递" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <ScrollViewer>
+            <StackPanel Spacing="12">
+                <TextBlock Text="Intent 传参：" FontWeight="Bold"/>
+                <TextBox x:Name="ExtraText" Text="Hello from Avalonia" Watermark="要传递的文本"/>
+                <Button Content="🚀 发送 Intent（ACTION_SEND）" Click="OnSendIntent"
+                        HorizontalAlignment="Stretch"/>
+
+                <Border Height="1" Background="Gray"/>
+
+                <TextBlock Text="URL Scheme 跳转：" FontWeight="Bold"/>
+                <TextBox x:Name="SchemeUrl" Text="https://www.bing.com" Watermark="URL"/>
+                <Button Content="🌐 打开 URL" Click="OnOpenUrl"
+                        HorizontalAlignment="Stretch"/>
+
+                <Border Height="1" Background="Gray"/>
+
+                <TextBlock Text="分享文本：" FontWeight="Bold"/>
+                <TextBox x:Name="ShareText" Text="来自 Avalonia Demo 的分享内容"
+                         Watermark="要分享的内容"/>
+                <Button Content="📤 系统分享" Click="OnShare"
+                        HorizontalAlignment="Stretch"/>
+
+                <TextBlock x:Name="StatusText" Foreground="Gray" TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

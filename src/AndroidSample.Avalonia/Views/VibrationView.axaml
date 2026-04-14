@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.VibrationView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="8. 震动与反馈" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+            <Button Content="📳 默认震动（200 ms）"  Click="OnDefaultVibrate"  HorizontalAlignment="Stretch"/>
+            <Button Content="💬 交互反馈震动（短）" Click="OnHapticFeedback" HorizontalAlignment="Stretch"/>
+            <Button Content="🔔 自定义波形震动"     Click="OnPatternVibrate" HorizontalAlignment="Stretch"/>
+            <TextBlock x:Name="StatusText" Foreground="Gray"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

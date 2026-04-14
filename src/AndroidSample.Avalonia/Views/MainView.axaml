@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.MainView">
+
+    <!-- 根容器：支持在功能页和主菜单之间切换 -->
+    <Grid>
+        <!-- 主菜单 -->
+        <ScrollViewer x:Name="MenuPanel">
+            <StackPanel Margin="16" Spacing="10">
+                <TextBlock Text="Avalonia Android Demo"
+                           FontSize="22" FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,16,0,8"/>
+
+                <Button Content="1. 应用生命周期" Click="OnLifecycle" HorizontalAlignment="Stretch"/>
+                <Button Content="2. 触控交互"     Click="OnTouch"     HorizontalAlignment="Stretch"/>
+                <Button Content="3. 启动页与动画" Click="OnSplash"    HorizontalAlignment="Stretch"/>
+                <Button Content="4. 传感器"        Click="OnSensor"    HorizontalAlignment="Stretch"/>
+                <Button Content="5. 网络与蓝牙"   Click="OnNetwork"   HorizontalAlignment="Stretch"/>
+                <Button Content="6. 多媒体（相机/相册）" Click="OnMedia" HorizontalAlignment="Stretch"/>
+                <Button Content="7. 定位与地图"   Click="OnLocation"  HorizontalAlignment="Stretch"/>
+                <Button Content="8. 震动与反馈"   Click="OnVibration" HorizontalAlignment="Stretch"/>
+                <Button Content="9. 状态栏与系统UI" Click="OnStatusBar" HorizontalAlignment="Stretch"/>
+                <Button Content="10. 电话功能"    Click="OnPhone"     HorizontalAlignment="Stretch"/>
+                <Button Content="11. 联系人功能"  Click="OnContacts"  HorizontalAlignment="Stretch"/>
+                <Button Content="12. 文件存储"    Click="OnFileStorage" HorizontalAlignment="Stretch"/>
+                <Button Content="13. 应用间数据传递" Click="OnIntent"  HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 功能页容器（默认隐藏） -->
+        <ContentControl x:Name="FeaturePage" IsVisible="False"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.PhoneView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="10. 电话功能" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+            <TextBlock Text="拨号号码："/>
+            <TextBox x:Name="PhoneNumber" Text="10086" Watermark="输入电话号码"/>
+            <Button Content="📞 拨号" Click="OnDial" HorizontalAlignment="Stretch"/>
+
+            <Border Height="1" Background="Gray"/>
+
+            <TextBlock Text="来电状态监听：" FontWeight="Bold"/>
+            <Button x:Name="BtnMonitor" Content="开始监听来电" Click="OnToggleMonitor"
+                    HorizontalAlignment="Stretch"/>
+            <TextBlock x:Name="CallStatus" FontFamily="Monospace" TextWrapping="Wrap"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

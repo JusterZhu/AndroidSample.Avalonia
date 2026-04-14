@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.LocationView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="7. 定位与地图" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+            <Button Content="📍 获取当前位置" Click="OnGetLocation"
+                    HorizontalAlignment="Stretch"/>
+            <TextBlock x:Name="LocationText" TextWrapping="Wrap" FontFamily="Monospace"/>
+
+            <Border Height="1" Background="Gray"/>
+
+            <TextBlock Text="地图预览（OpenStreetMap WebView）：" FontWeight="Bold"/>
+            <TextBlock Text="注：需联网，在 WebView 内渲染地图瓦片。"
+                       Foreground="Gray" TextWrapping="Wrap"/>
+            <Button Content="在地图上显示位置" Click="OnShowMap"
+                    HorizontalAlignment="Stretch"/>
+            <TextBlock x:Name="MapStatus" Foreground="#1565C0"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

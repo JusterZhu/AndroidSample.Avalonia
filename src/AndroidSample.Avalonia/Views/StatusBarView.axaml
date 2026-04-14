@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.StatusBarView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="9. 状态栏与系统UI" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+            <Button Content="🌙 切换深色模式"      Click="OnDarkMode"      HorizontalAlignment="Stretch"/>
+            <Button Content="📱 沉浸式状态栏"       Click="OnImmersive"     HorizontalAlignment="Stretch"/>
+            <Button Content="✅ 恢复正常状态栏"     Click="OnNormalBar"     HorizontalAlignment="Stretch"/>
+            <Button Content="🔲 隐藏导航栏"         Click="OnHideNavBar"    HorizontalAlignment="Stretch"/>
+            <Button Content="🔲 显示导航栏"         Click="OnShowNavBar"    HorizontalAlignment="Stretch"/>
+            <TextBlock x:Name="StatusText" TextWrapping="Wrap" Foreground="Gray"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

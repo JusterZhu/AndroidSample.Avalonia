@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.ContactsView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="11. 联系人功能" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+            <Button Content="📖 读取联系人（前20条）" Click="OnReadContacts"
+                    HorizontalAlignment="Stretch"/>
+            <TextBlock x:Name="PermissionHint" Foreground="#C62828"
+                       TextWrapping="Wrap" IsVisible="False">
+                需要 READ_CONTACTS 权限，请在应用权限设置中授权。
+            </TextBlock>
+            <ScrollViewer>
+                <ItemsControl x:Name="ContactList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="8,4" BorderBrush="#E0E0E0"
+                                    BorderThickness="0,0,0,1">
+                                <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+    </DockPanel>
+</UserControl>
