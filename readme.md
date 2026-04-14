@@ -20,23 +20,86 @@
 | 12 | 文件存储 | 内部/外部文件读写/缓存清除 |
 | 13 | 应用间数据传递 | Intent 传参/URL Scheme/系统分享 |
 
-## 构建要求
+## 环境搭建
 
-- .NET 10 SDK
-- `dotnet workload install android`
-- Android SDK (API 21+, 推荐 API 35)
+> **如果在 Visual Studio 中打开项目后出现红色波浪线或"无法加载项目"错误，请按以下步骤完整配置开发环境。**
+
+### 方式一：Visual Studio 2022（推荐 Windows 用户）
+
+1. **安装 Visual Studio 2022**（17.x 或更高版本）  
+   下载地址：<https://visualstudio.microsoft.com/vs/>
+
+2. **在 Visual Studio Installer 中勾选 ".NET MAUI 开发" 工作负载**  
+   - 打开 **Visual Studio Installer** → 选择 **修改**  
+   - 在"工作负载"选项卡中勾选 **".NET MAUI 开发"**（该工作负载会自动安装 Android SDK、Android NDK 及 .NET Android 工作负载）  
+   - 点击 **修改** 等待安装完成
+
+3. **安装 .NET 10 SDK**  
+   下载地址：<https://dotnet.microsoft.com/download/dotnet/10.0>  
+   安装完成后运行以下命令验证：
+   ```bash
+   dotnet --version
+   # 应输出 10.x.x
+   ```
+
+4. **安装 .NET Android 工作负载**（命令行补充安装，确保完整）
+   ```bash
+   dotnet workload install android
+   ```
+
+5. **重新打开 Visual Studio**，在解决方案资源管理器中右键项目 → **重新加载项目**，即可消除红色错误。
+
+---
+
+### 方式二：命令行（跨平台 / macOS / Linux）
+
+```bash
+# 1. 安装 .NET 10 SDK（见上方下载链接）
+
+# 2. 安装 Android workload
+dotnet workload install android
+
+# 3. 进入项目目录并构建
+cd src/AndroidSample.Avalonia
+dotnet build -f net10.0-android
+```
+
+---
+
+### Android SDK 要求
+
+| 项目 | 要求 |
+|------|------|
+| 最低 API 级别 | API 21（Android 5.0） |
+| 推荐 API 级别 | API 35（Android 15） |
+| 构建工具 | 由 .NET Android workload 自动管理 |
+
+Visual Studio 安装 ".NET MAUI 开发" 工作负载后会自动下载并配置 Android SDK，无需手动安装。
 
 ## 构建与运行
 
 ```bash
-# 安装 Android workload（首次）
-dotnet workload install android
-
-# 连接 Android 设备或启动模拟器后：
+# 连接 Android 真机（开启 USB 调试）或启动 Android 模拟器后：
 cd src/AndroidSample.Avalonia
+
+# 调试构建
 dotnet build -f net10.0-android
+
+# 直接部署运行
 dotnet run -f net10.0-android
 ```
+
+在 Visual Studio 中也可直接按 **F5** 或点击工具栏的运行按钮，选择目标设备后部署。
+
+## 常见问题排查
+
+| 现象 | 原因 | 解决方法 |
+|------|------|----------|
+| 打开项目后大量红色波浪线 | 未安装 .NET Android workload | 执行 `dotnet workload install android` 后重启 VS |
+| "无法解析 Android.xxx 命名空间" | Android workload 缺失或 SDK 路径未配置 | 通过 VS Installer 重新安装 ".NET MAUI 开发" 工作负载 |
+| `TargetFramework net10.0-android` 不被识别 | .NET SDK 版本过低（低于 10） | 升级至 .NET 10 SDK |
+| 找不到 Android 设备 | 未开启 USB 调试 / 驱动未安装 | 在设备"开发者选项"中开启 USB 调试，并安装 OEM USB 驱动 |
+| 模拟器启动失败 | Hyper-V / HAXM 未启用 | 在 BIOS 中开启 Intel VT-x/AMD-V，并启用 Windows Hyper-V 功能 |
 
 ## 项目结构
 
