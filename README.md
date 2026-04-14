@@ -1,6 +1,6 @@
 # Avalonia Android Demo
 
-基于 **Avalonia UI 11.2.3** + **.NET 9 Android** 的极简功能演示，涵盖 13 个 Android 核心能力。
+基于 **Avalonia UI 12.0.1** + **.NET 10 Android** 的极简功能演示，涵盖 13 个 Android 核心能力。
 
 ## 功能清单
 
@@ -22,9 +22,9 @@
 
 ## 构建要求
 
-- .NET 9 SDK
+- .NET 10 SDK
 - `dotnet workload install android`
-- Android SDK (API 21+, 推荐 API 34)
+- Android SDK (API 21+, 推荐 API 35)
 
 ## 构建与运行
 
@@ -34,8 +34,8 @@ dotnet workload install android
 
 # 连接 Android 设备或启动模拟器后：
 cd src/AndroidSample.Avalonia
-dotnet build -f net9.0-android
-dotnet run -f net9.0-android
+dotnet build -f net10.0-android
+dotnet run -f net10.0-android
 ```
 
 ## 项目结构
