@@ -86,6 +86,7 @@ public partial class NetworkView : UserControl
                 });
             });
 
+            _bleCts?.Dispose();
             _bleCts = new CancellationTokenSource();
             _bleScanner?.StartScan(_scanCallback);
 

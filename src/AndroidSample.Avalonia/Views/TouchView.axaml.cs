@@ -99,6 +99,14 @@ public partial class TouchView : UserControl
         Dispatcher.UIThread.Post(() =>
         {
             _log.AppendLine($"{DateTime.Now:HH:mm:ss.fff}  {msg}");
+            // Keep log bounded to ~50 lines
+            var text = _log.ToString();
+            var lines = text.Split('\n');
+            if (lines.Length > 50)
+            {
+                _log.Clear();
+                _log.Append(string.Join('\n', lines[^50..]));
+            }
             EventLog.Text = _log.ToString();
         });
     }

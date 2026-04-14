@@ -25,6 +25,7 @@ public partial class MediaView : UserControl
     public const int RequestGallery = 1002;
 
     private Android.Net.Uri? _photoUri;
+    private Avalonia.Media.Imaging.Bitmap? _currentBitmap;
 
     public MediaView(MainView main)
     {
@@ -85,6 +86,8 @@ public partial class MediaView : UserControl
             stream.CopyTo(ms);
             ms.Seek(0, SeekOrigin.Begin);
             var bitmap = new Avalonia.Media.Imaging.Bitmap(ms);
+            _currentBitmap?.Dispose();
+            _currentBitmap = bitmap;
             PreviewImage.Source = bitmap;
             StatusText.Text = $"图片已加载（{bitmap.PixelSize.Width}×{bitmap.PixelSize.Height}）";
         }
@@ -99,6 +102,7 @@ public partial class MediaView : UserControl
         base.OnUnloaded(e);
         if (MainActivity.Current != null)
             MainActivity.Current.OnActivityResultCallback -= OnActivityResult;
+        _currentBitmap?.Dispose();
     }
 
     private void OnBack(object? s, RoutedEventArgs e)
