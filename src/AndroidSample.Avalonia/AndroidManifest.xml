@@ -42,6 +42,7 @@
     <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false"/>
 
     <application
+        android:name=".MainApplication"
         android:label="Avalonia Demo"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/MyTheme.NoActionBar"

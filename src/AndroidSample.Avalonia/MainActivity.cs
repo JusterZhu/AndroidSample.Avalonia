@@ -1,7 +1,6 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Avalonia;
 using Avalonia.Android;
 
 namespace AndroidSample.Avalonia;
@@ -24,17 +23,6 @@ public class MainActivity : AvaloniaMainActivity
 
     /// <summary>Activity Result 回调（MediaView 等功能页订阅）。</summary>
     public event Action<int, Result, Intent?>? OnActivityResultCallback;
-
-    protected override AppBuilder CreateAppBuilder()
-    {
-        return AppBuilder.Configure<App>().UseAndroid();
-    }
-
-    protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
-    {
-        return base.CustomizeAppBuilder(builder)
-            .WithInterFont();
-    }
 
     protected override void OnResume()
     {
