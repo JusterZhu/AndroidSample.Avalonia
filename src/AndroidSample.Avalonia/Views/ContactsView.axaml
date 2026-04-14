@@ -20,7 +20,7 @@
                         <DataTemplate>
                             <Border Padding="8,4" BorderBrush="#E0E0E0"
                                     BorderThickness="0,0,0,1">
-                                <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                                <TextBlock  TextWrapping="Wrap"/>
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

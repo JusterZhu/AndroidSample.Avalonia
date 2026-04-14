@@ -21,6 +21,7 @@ public partial class ContactsView : UserControl
     {
         _main = main;
         InitializeComponent();
+        DataContext = this;
     }
 
     private void OnReadContacts(object? s, RoutedEventArgs e)

@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Styling;
+using Application = Avalonia.Application;
 
 namespace AndroidSample.Avalonia.Views;
 
