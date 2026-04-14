@@ -42,7 +42,7 @@ public class MainActivity : AvaloniaMainActivity
         OnActivityResultCallback?.Invoke(requestCode, resultCode, data);
     }
 
-    protected override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+    public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
         Permission[] grantResults)
     {
         base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
