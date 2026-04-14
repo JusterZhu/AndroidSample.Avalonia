@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.NetworkView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="5. 网络与蓝牙" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <ScrollViewer>
+            <StackPanel Spacing="12">
+                <TextBlock Text="WiFi 状态：" FontWeight="Bold"/>
+                <TextBlock x:Name="WifiText"/>
+                <Button Content="刷新 WiFi 状态" Click="OnRefreshWifi"/>
+
+                <Border Height="1" Background="Gray"/>
+
+                <TextBlock Text="BLE 扫描：" FontWeight="Bold"/>
+                <Button x:Name="BtnBleScan" Content="开始 BLE 扫描（5 s）" Click="OnBleScan"/>
+                <ScrollViewer Height="100">
+                    <TextBlock x:Name="BleText" TextWrapping="Wrap" FontFamily="Monospace"/>
+                </ScrollViewer>
+
+                <Border Height="1" Background="Gray"/>
+
+                <TextBlock Text="HTTP 请求：" FontWeight="Bold"/>
+                <Button Content="GET httpbin.org/get" Click="OnHttpGet"/>
+                <ScrollViewer Height="150">
+                    <TextBlock x:Name="HttpText" TextWrapping="Wrap" FontFamily="Monospace"/>
+                </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.TouchView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="2. 触控交互" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+            <!-- 触控测试区域 -->
+            <Border x:Name="TouchArea"
+                    Height="200"
+                    Background="#E3F2FD"
+                    CornerRadius="8">
+                <TextBlock x:Name="TouchInfo"
+                           Text="在此区域触摸"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"/>
+            </Border>
+
+            <TextBlock Text="事件日志：" FontWeight="Bold"/>
+            <ScrollViewer Height="200">
+                <TextBlock x:Name="EventLog" TextWrapping="Wrap" FontFamily="Monospace"/>
+            </ScrollViewer>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

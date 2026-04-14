@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.FileStorageView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="12. 文件存储与内存卡读写" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <ScrollViewer>
+            <StackPanel Spacing="12">
+                <TextBlock Text="内部存储：" FontWeight="Bold"/>
+                <Button Content="📝 写入内部文件" Click="OnWriteInternal" HorizontalAlignment="Stretch"/>
+                <Button Content="📖 读取内部文件" Click="OnReadInternal"  HorizontalAlignment="Stretch"/>
+
+                <Border Height="1" Background="Gray"/>
+
+                <TextBlock Text="外部存储（公共目录）：" FontWeight="Bold"/>
+                <Button Content="📝 写入外部文件" Click="OnWriteExternal" HorizontalAlignment="Stretch"/>
+                <Button Content="📖 读取外部文件" Click="OnReadExternal"  HorizontalAlignment="Stretch"/>
+
+                <Border Height="1" Background="Gray"/>
+
+                <Button Content="🗑 清除缓存" Click="OnClearCache" HorizontalAlignment="Stretch"/>
+
+                <TextBlock x:Name="ResultText" TextWrapping="Wrap" FontFamily="Monospace"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

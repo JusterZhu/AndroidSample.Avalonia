@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AndroidSample.Avalonia.Views.SplashDemoView">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Spacing="8">
+            <TextBlock Text="3. 启动页与开机动画" FontSize="20" FontWeight="Bold"/>
+            <Button Content="← 返回" Click="OnBack"/>
+        </StackPanel>
+
+        <ScrollViewer>
+            <StackPanel Spacing="12">
+                <TextBlock TextWrapping="Wrap" FontSize="14">
+Android 原生 Splash 已在 SplashActivity.cs 中配置：
+• 主题 @style/MyTheme.Splash（windowBackground 指向 splash_background.xml）
+• MainLauncher=true，NoHistory=true
+• 淡入动画 1.5 s 后跳转 MainActivity
+                </TextBlock>
+
+                <TextBlock Text="演示：Avalonia 内部淡入动画" FontWeight="Bold"/>
+                <Border x:Name="AnimBox" Height="120" CornerRadius="12"
+                        Background="#1565C0" Opacity="0">
+                    <TextBlock Text="✓ Avalonia 过渡动画"
+                               Foreground="White" FontSize="18"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+                <Button Content="播放动画" Click="OnPlay" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>
