@@ -25,6 +25,7 @@
 - .NET 10 SDK
 - `dotnet workload install android`
 - Android SDK (API 21+, 推荐 API 35)
+- **JDK 17 或更高版本**（manifest merger 工具需要 Java 17；若使用 JDK 11 及以下则会报 `UnsupportedClassVersionError`）
 
 ## 构建与运行
 
