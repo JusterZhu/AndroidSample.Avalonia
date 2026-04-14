@@ -1,5 +1,4 @@
 using Android.App;
-using Android.Content.ComponentCallbacks2;
 using Android.OS;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
