@@ -92,7 +92,7 @@
 ```bash
 # 完成前置步骤后直接构建：
 cd src/AndroidSample.Avalonia
-dotnet build -f net10.0-android
+dotnet build -f net10.0-android36.1
 ```
 
 ---
@@ -102,7 +102,7 @@ dotnet build -f net10.0-android
 | 项目 | 要求 |
 |------|------|
 | 最低 API 级别 | API 21（Android 5.0） |
-| 推荐 API 级别 | API 35（Android 15） |
+| 推荐 API 级别 | API 36.1（Android 16 Preview，随 .NET Android workload 36.1.43 附带） |
 | 构建工具 | 由 .NET Android workload 自动管理 |
 
 ## 构建与运行
@@ -112,10 +112,10 @@ dotnet build -f net10.0-android
 cd src/AndroidSample.Avalonia
 
 # 调试构建
-dotnet build -f net10.0-android
+dotnet build -f net10.0-android36.1
 
 # 直接部署运行
-dotnet run -f net10.0-android
+dotnet run -f net10.0-android36.1
 ```
 
 在 Rider 或 Visual Studio 中也可直接按 **F5** 或点击工具栏的运行按钮，选择目标设备后部署。
@@ -127,7 +127,7 @@ dotnet run -f net10.0-android
 | 打开项目后大量红色波浪线 | 未安装 .NET Android workload | 执行 `dotnet workload install android` 后重启 IDE |
 | "无法解析 Android.xxx 命名空间" | Android workload 缺失或 SDK 路径未配置 | 重新执行 workload 安装；Rider 用户需在设置中配置 Android SDK 路径 |
 | `TargetFramework net10.0-android` 不被识别 | .NET SDK 版本过低（低于 10） | 升级至 .NET 10 SDK |
-| `XA5207: 找不到适用于 API 级别 36 的 android.jar` | .NET Android workload 默认编译目标为 API 36，但本地 Android SDK 未安装该平台 | 在 Android SDK 管理器中安装 **Android 16 (API 36)** 平台；或直接使用 `net10.0-android35` 作为 TargetFramework（项目已默认设置） |
+| `XA5207: 找不到适用于 API 级别 36 的 android.jar` | 使用了旧版本代码（`net10.0-android` 未锁定版本），workload `36.1.43` 将其解析为 API 36 | 拉取最新代码（已改为 `net10.0-android36.1`）；或在 SDK 管理器中确认 `android-36.1` 平台已安装 |
 | Rider 中 Android SDK 路径为空 | 未安装 Android Studio 或未配置路径 | 安装 Android Studio 或在 Rider 设置 → Android 页面手动指定 SDK 路径 |
 | 找不到 Android 设备 | 未开启 USB 调试 / 驱动未安装 | 在设备"开发者选项"中开启 USB 调试，并安装 OEM USB 驱动 |
 | 模拟器启动失败 | Hyper-V / HAXM 未启用 | 在 BIOS 中开启 Intel VT-x/AMD-V，并启用 Windows Hyper-V 功能 |
