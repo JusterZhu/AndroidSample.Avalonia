@@ -127,6 +127,7 @@ dotnet run -f net10.0-android
 | 打开项目后大量红色波浪线 | 未安装 .NET Android workload | 执行 `dotnet workload install android` 后重启 IDE |
 | "无法解析 Android.xxx 命名空间" | Android workload 缺失或 SDK 路径未配置 | 重新执行 workload 安装；Rider 用户需在设置中配置 Android SDK 路径 |
 | `TargetFramework net10.0-android` 不被识别 | .NET SDK 版本过低（低于 10） | 升级至 .NET 10 SDK |
+| `XA5207: 找不到适用于 API 级别 36 的 android.jar` | .NET Android workload 默认编译目标为 API 36，但本地 Android SDK 未安装该平台 | 在 Android SDK 管理器中安装 **Android 16 (API 36)** 平台；或直接使用 `net10.0-android35` 作为 TargetFramework（项目已默认设置） |
 | Rider 中 Android SDK 路径为空 | 未安装 Android Studio 或未配置路径 | 安装 Android Studio 或在 Rider 设置 → Android 页面手动指定 SDK 路径 |
 | 找不到 Android 设备 | 未开启 USB 调试 / 驱动未安装 | 在设备"开发者选项"中开启 USB 调试，并安装 OEM USB 驱动 |
 | 模拟器启动失败 | Hyper-V / HAXM 未启用 | 在 BIOS 中开启 Intel VT-x/AMD-V，并启用 Windows Hyper-V 功能 |
