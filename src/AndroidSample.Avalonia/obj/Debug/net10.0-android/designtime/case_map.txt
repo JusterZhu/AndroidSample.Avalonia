@@ -1,6 +1,0 @@
-animation\splash_fade_in;animation\splash_fade_in
-drawable\splash_background;drawable\splash_background
-layout\splash_layout;layout\splash_layout
-mipmap\ic_launcher;mipmap\ic_launcher
-values\styles;values\styles
-xml\file_paths;xml\file_paths
