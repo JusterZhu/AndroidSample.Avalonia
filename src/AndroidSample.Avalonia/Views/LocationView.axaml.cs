@@ -40,6 +40,14 @@ public partial class LocationView : UserControl
             return;
         }
 
+        // 检查 Network Provider 是否可用
+        bool networkEnabled = _locMgr.IsProviderEnabled(LocationManager.NetworkProvider);
+        if (!networkEnabled)
+        {
+            LocationText.Text = "位置服务已关闭，请在系统设置中开启定位权限";
+            return;
+        }
+
         // 请求单次更新（Network Provider）
         _proxy = new LocationProxy(loc =>
         {

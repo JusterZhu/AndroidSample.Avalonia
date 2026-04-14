@@ -24,8 +24,12 @@ public partial class IntentView : UserControl
         var intent = new Intent(Intent.ActionSend);
         intent.SetType("text/plain");
         intent.PutExtra(Intent.ExtraText, text);
-        intent.SetFlags(ActivityFlags.NewTask);
-        Android.App.Application.Context.StartActivity(intent);
+
+        // Use CreateChooser so the user can pick a target app and
+        // avoid ActivityNotFoundException when no default handler is set.
+        var chooser = Intent.CreateChooser(intent, "选择目标应用")!;
+        chooser.SetFlags(ActivityFlags.NewTask);
+        Android.App.Application.Context.StartActivity(chooser);
         StatusText.Text = $"已发送 Intent，内容：{text}";
     }
 
