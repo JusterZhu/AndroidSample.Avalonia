@@ -1,6 +1,0 @@
-﻿Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidSample.Avalonia", "AndroidSample.Avalonia.csproj", "{C4862AF5-67E3-426F-8388-96BD052595AF}"
-EndProject
-Global
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-	EndGlobalSection
-EndGlobal
