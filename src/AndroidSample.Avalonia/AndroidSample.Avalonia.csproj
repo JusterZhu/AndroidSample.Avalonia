@@ -15,9 +15,18 @@
     <Platforms>AnyCPU</Platforms>
     <!-- Use the JDK pointed to by JAVA_HOME instead of auto-detecting.
          Set JAVA_HOME to a JDK 17+ installation to avoid the manifest merger
-         UnsupportedClassVersionError (class file version 61 requires Java 17). -->
+         UnsupportedClassVersionError (class file version 61 requires Java 17).
+         After setting JAVA_HOME you MUST restart Visual Studio and any open
+         terminals — processes do not pick up env-var changes made after launch. -->
     <JavaSdkDirectory Condition="'$(JAVA_HOME)' != ''">$(JAVA_HOME)</JavaSdkDirectory>
   </PropertyGroup>
+
+  <!-- Fail early with a clear message when JAVA_HOME is not set, rather than
+       letting the manifest merger produce the cryptic UnsupportedClassVersionError. -->
+  <Target Name="_RequireJavaHome" BeforeTargets="Build;_SetupJavaSdk">
+    <Error Condition="'$(JAVA_HOME)' == ''"
+           Text="JAVA_HOME is not set. Set JAVA_HOME to your JDK 17+ directory (e.g. C:\Program Files\Eclipse Adoptium\jdk-17.x.x.x-hotspot), then close and reopen Visual Studio and all terminal windows for the change to take effect." />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="12.0.1" />

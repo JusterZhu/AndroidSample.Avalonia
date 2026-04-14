@@ -33,6 +33,10 @@
 > MSBuild 通过 `JAVA_HOME` 环境变量定位 JDK，而不是通过 `PATH`。即使 `java -version` 显示 17，  
 > 若 `JAVA_HOME` 未设置或仍指向旧版 JDK，构建依然会报 `UnsupportedClassVersionError`。
 
+> ⚠️ **设置 `JAVA_HOME` 后，必须完全关闭并重新打开 Visual Studio 和所有终端窗口。**  
+> 进程在启动时继承环境变量，已运行的进程无法感知之后发生的环境变量变化。  
+> 即使在 PowerShell 中验证 `$env:JAVA_HOME` 正确，在原来的 Visual Studio 会话中构建仍会使用旧 JDK。
+
 安装 JDK 17（推荐 [Eclipse Temurin](https://adoptium.net/)）后，按以下步骤设置 `JAVA_HOME`：
 
 **Windows — 第一步：找到 JDK 17 安装路径**
@@ -68,19 +72,22 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 17)   # macOS
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ```
 
-**第三步：验证设置（重新打开终端后执行）**
+**第三步：完全重启 Visual Studio 和终端，然后验证（重新打开终端后执行）**
+
+> 跳过重启是最常见的错误——即使 PowerShell 中验证已通过，旧 Visual Studio 进程仍会使用旧 JDK。
+
 ```powershell
-# Windows PowerShell — JAVA_HOME 和 java.exe 都应显示 17
+# Windows PowerShell（在新开的终端中执行）— JAVA_HOME 和 java.exe 都应显示 17
 echo $env:JAVA_HOME
 & "$env:JAVA_HOME\bin\java" -version
 ```
 ```bash
-# macOS / Linux
+# macOS / Linux（在新开的终端中执行）
 echo $JAVA_HOME
 "$JAVA_HOME/bin/java" -version   # 应显示 openjdk 17...
 ```
 
-项目文件已通过 `<JavaSdkDirectory>$(JAVA_HOME)</JavaSdkDirectory>` 将构建工具显式绑定到 `JAVA_HOME`，可避免多 JDK 环境下的自动检测错误。
+项目文件已通过 `<JavaSdkDirectory>$(JAVA_HOME)</JavaSdkDirectory>` 将构建工具显式绑定到 `JAVA_HOME`。若构建时 `JAVA_HOME` 未设置，项目会立即报错并给出明确提示，而非产生难以理解的 `UnsupportedClassVersionError`。
 
 ## 构建与运行
 
