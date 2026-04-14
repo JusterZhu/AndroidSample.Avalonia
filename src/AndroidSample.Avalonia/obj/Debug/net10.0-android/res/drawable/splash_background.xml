@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash Screen 背景：渐变 + 居中文字 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:startColor="#1565C0"
+                android:endColor="#42A5F5"
+                android:type="linear"/>
+        </shape>
+    </item>
+</layer-list>
