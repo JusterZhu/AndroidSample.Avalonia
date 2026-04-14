@@ -17,13 +17,18 @@ namespace AndroidSample.Avalonia;
     MainLauncher = false,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize |
                            ConfigChanges.UiMode)]
-public class MainActivity : AvaloniaMainActivity<App>
+public class MainActivity : AvaloniaMainActivity
 {
     /// <summary>当前活跃的 MainActivity 实例（用于 StartActivityForResult 等）。</summary>
     public static MainActivity? Current { get; private set; }
 
     /// <summary>Activity Result 回调（MediaView 等功能页订阅）。</summary>
     public event Action<int, Result, Intent?>? OnActivityResultCallback;
+
+    protected override AppBuilder CreateAppBuilder()
+    {
+        return AppBuilder.Configure<App>().UseAndroid();
+    }
 
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {

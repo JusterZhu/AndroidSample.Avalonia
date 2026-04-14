@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using System;
+using Location = Android.Locations.Location;
 
 namespace AndroidSample.Avalonia.Views;
 

@@ -5,7 +5,7 @@ using AndroidSample.Avalonia.Views;
 
 namespace AndroidSample.Avalonia;
 
-public partial class App : Application
+public partial class App : global::Avalonia.Application
 {
     public override void Initialize()
     {

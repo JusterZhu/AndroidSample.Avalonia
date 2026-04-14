@@ -1,6 +1,5 @@
 using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.OS;
 using Android.Provider;
 using Avalonia.Controls;
@@ -25,7 +24,7 @@ public partial class MediaView : UserControl
     public const int RequestGallery = 1002;
 
     private Android.Net.Uri? _photoUri;
-    private Avalonia.Media.Imaging.Bitmap? _currentBitmap;
+    private Bitmap? _currentBitmap;
 
     public MediaView(MainView main)
     {
@@ -85,7 +84,7 @@ public partial class MediaView : UserControl
             using var ms = new MemoryStream();
             stream.CopyTo(ms);
             ms.Seek(0, SeekOrigin.Begin);
-            var bitmap = new Avalonia.Media.Imaging.Bitmap(ms);
+            var bitmap = new Bitmap(ms);
             _currentBitmap?.Dispose();
             _currentBitmap = bitmap;
             PreviewImage.Source = bitmap;
