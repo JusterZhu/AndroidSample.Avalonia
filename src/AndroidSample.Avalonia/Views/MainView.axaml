@@ -5,7 +5,7 @@
     <!-- 根容器：支持在功能页和主菜单之间切换 -->
     <Grid>
         <!-- 主菜单 -->
-        <ScrollView x:Name="MenuPanel">
+        <ScrollViewer x:Name="MenuPanel">
             <StackPanel Margin="16" Spacing="10">
                 <TextBlock Text="Avalonia Android Demo"
                            FontSize="22" FontWeight="Bold"
@@ -26,7 +26,7 @@
                 <Button Content="12. 文件存储"    Click="OnFileStorage" HorizontalAlignment="Stretch"/>
                 <Button Content="13. 应用间数据传递" Click="OnIntent"  HorizontalAlignment="Stretch"/>
             </StackPanel>
-        </ScrollView>
+        </ScrollViewer>
 
         <!-- 功能页容器（默认隐藏） -->
         <ContentControl x:Name="FeaturePage" IsVisible="False"/>

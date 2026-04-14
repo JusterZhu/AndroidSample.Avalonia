@@ -12,10 +12,11 @@ namespace AndroidSample.Avalonia.Views;
 /// 功能7：定位 —— 获取单次 GPS/Network 定位；
 ///         地图：通过 Intent 打开地图应用展示坐标。
 /// </summary>
-public partial class LocationView : UserControl, ILocationListener
+public partial class LocationView : UserControl
 {
     private readonly MainView _main;
     private LocationManager? _locMgr;
+    private LocationProxy? _proxy;
     private double _lat, _lon;
 
     public LocationView(MainView main)
@@ -39,8 +40,13 @@ public partial class LocationView : UserControl, ILocationListener
             return;
         }
 
-        // 请求单次更新
-        _locMgr.RequestLocationUpdates(LocationManager.NetworkProvider, 0, 0, this);
+        // 请求单次更新（Network Provider）
+        _proxy = new LocationProxy(loc =>
+        {
+            UpdateLocation(loc);
+            _locMgr?.RemoveUpdates(_proxy);
+        });
+        _locMgr.RequestLocationUpdates(LocationManager.NetworkProvider, 0, 0, _proxy);
     }
 
     private void OnShowMap(object? s, RoutedEventArgs e)
@@ -66,24 +72,29 @@ public partial class LocationView : UserControl, ILocationListener
             LocationText.Text =
                 $"纬度：{_lat:F6}\n经度：{_lon:F6}\n精度：{loc.Accuracy:F1} m\n" +
                 $"时间：{DateTimeOffset.FromUnixTimeMilliseconds(loc.Time):HH:mm:ss}");
-        _locMgr?.RemoveUpdates(this);
     }
-
-    // ── ILocationListener ─────────────────────────────────────
-    public void OnLocationChanged(Location location) => UpdateLocation(location);
-    public void OnProviderEnabled(string provider) { }
-    public void OnProviderDisabled(string provider) { }
-    public void OnStatusChanged(string? provider, Availability status, Bundle? extras) { }
 
     private void OnBack(object? s, RoutedEventArgs e)
     {
-        _locMgr?.RemoveUpdates(this);
+        if (_proxy != null) _locMgr?.RemoveUpdates(_proxy);
         _main.BackToMenu();
     }
 
     protected override void OnUnloaded(RoutedEventArgs e)
     {
         base.OnUnloaded(e);
-        _locMgr?.RemoveUpdates(this);
+        if (_proxy != null) _locMgr?.RemoveUpdates(_proxy);
+    }
+
+    // ── Java 代理 ─────────────────────────────────────────────
+    private sealed class LocationProxy : Java.Lang.Object, ILocationListener
+    {
+        private readonly Action<Location> _onLocation;
+        public LocationProxy(Action<Location> onLocation) => _onLocation = onLocation;
+
+        public void OnLocationChanged(Location location) => _onLocation(location);
+        public void OnProviderEnabled(string provider) { }
+        public void OnProviderDisabled(string provider) { }
+        public void OnStatusChanged(string? provider, Availability status, Bundle? extras) { }
     }
 }

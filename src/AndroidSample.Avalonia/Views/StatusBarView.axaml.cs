@@ -1,7 +1,9 @@
 using Android.OS;
 using Android.Views;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Styling;
 
 namespace AndroidSample.Avalonia.Views;
 
@@ -23,15 +25,14 @@ public partial class StatusBarView : UserControl
     // ── 深色模式 ──────────────────────────────────────────────
     private void OnDarkMode(object? s, RoutedEventArgs e)
     {
-        var mgr = Android.App.UiModeManager.FromContext(Android.App.Application.Context);
-        if (mgr != null)
+        // 使用 Avalonia 的主题切换（无需系统权限）
+        var app = Application.Current;
+        if (app != null)
         {
-            // 切换 Night Mode
-            if (mgr.NightMode == Android.App.UiNightMode.Yes)
-                mgr.NightMode = Android.App.UiNightMode.No;
-            else
-                mgr.NightMode = Android.App.UiNightMode.Yes;
-            StatusText.Text = $"深色模式：{mgr.NightMode}";
+            app.RequestedThemeVariant = app.RequestedThemeVariant == ThemeVariant.Dark
+                ? ThemeVariant.Light
+                : ThemeVariant.Dark;
+            StatusText.Text = $"当前主题：{app.RequestedThemeVariant}";
         }
     }
 

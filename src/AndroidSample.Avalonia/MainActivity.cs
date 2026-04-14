@@ -48,4 +48,11 @@ public class MainActivity : AvaloniaMainActivity<App>
         base.OnActivityResult(requestCode, resultCode, data);
         OnActivityResultCallback?.Invoke(requestCode, resultCode, data);
     }
+
+    protected override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+        Permission[] grantResults)
+    {
+        base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionHelper.OnResult(requestCode, permissions, grantResults);
+    }
 }

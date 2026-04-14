@@ -20,6 +20,8 @@
     <PackageReference Include="Avalonia.Android" Version="11.2.3" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.3" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
+    <!-- AndroidX FileProvider (相机拍照临时文件) -->
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.13.1.3" />
   </ItemGroup>
 
   <ItemGroup>
