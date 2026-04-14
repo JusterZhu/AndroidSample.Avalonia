@@ -22,44 +22,75 @@
 
 ## 环境搭建
 
-> **如果在 Visual Studio 中打开项目后出现红色波浪线或"无法加载项目"错误，请按以下步骤完整配置开发环境。**
+> **如果打开项目后出现红色波浪线或"无法加载项目"错误，请按以下步骤完整配置开发环境。**
 
-### 方式一：Visual Studio 2022（推荐 Windows 用户）
+### 前置：安装 .NET 10 SDK 并安装 Android Workload
+
+所有 IDE 方式均依赖以下基础步骤：
+
+1. **安装 .NET 10 SDK**  
+   下载地址：<https://dotnet.microsoft.com/download/dotnet/10.0>  
+   安装完成后验证：
+   ```bash
+   dotnet --version
+   # 应输出 10.x.x
+   ```
+
+2. **安装 .NET Android 工作负载**
+   ```bash
+   dotnet workload install android
+   ```
+
+---
+
+### 方式一：JetBrains Rider
+
+1. **安装 Rider**（2024.1 或更高版本，内置 .NET Android 支持）  
+   下载地址：<https://www.jetbrains.com/rider/download/>
+
+2. **完成上方的前置步骤**（安装 .NET 10 SDK + `dotnet workload install android`）
+
+3. **配置 Android SDK 路径**  
+   - 打开 **File → Settings**（macOS：**Rider → Settings**）  
+   - 导航到 **Build, Execution, Deployment → Android**  
+   - 在 **Android SDK location** 中填入 SDK 路径（默认位置参考下表）  
+
+   | 系统 | 默认 Android SDK 路径 |
+   |------|----------------------|
+   | Windows | `%LOCALAPPDATA%\Android\Sdk` |
+   | macOS | `~/Library/Android/sdk` |
+   | Linux | `~/Android/Sdk` |
+
+   > **提示**：若本地没有 Android SDK，可安装 Android Studio（<https://developer.android.com/studio>）获取完整 SDK，或在 Rider 的 Android 设置页面点击 **Download** 自动下载。
+
+4. **重新加载项目**  
+   - 关闭并重新打开项目，或在项目树中右键 `.csproj` → **Reload Project**  
+   - 红色波浪线消失后即可正常编译
+
+5. **运行项目**  
+   - 连接 Android 真机（开启 USB 调试）或创建 AVD 模拟器  
+   - 在 Rider 工具栏的运行目标下拉框中选择设备，点击 **▶ Run** 即可
+
+---
+
+### 方式二：Visual Studio 2022（Windows）
 
 1. **安装 Visual Studio 2022**（17.x 或更高版本）  
    下载地址：<https://visualstudio.microsoft.com/vs/>
 
 2. **在 Visual Studio Installer 中勾选 ".NET MAUI 开发" 工作负载**  
    - 打开 **Visual Studio Installer** → 选择 **修改**  
-   - 在"工作负载"选项卡中勾选 **".NET MAUI 开发"**（该工作负载会自动安装 Android SDK、Android NDK 及 .NET Android 工作负载）  
+   - 在"工作负载"选项卡中勾选 **".NET MAUI 开发"**（会自动安装 Android SDK、Android NDK 及 .NET Android 工作负载）  
    - 点击 **修改** 等待安装完成
 
-3. **安装 .NET 10 SDK**  
-   下载地址：<https://dotnet.microsoft.com/download/dotnet/10.0>  
-   安装完成后运行以下命令验证：
-   ```bash
-   dotnet --version
-   # 应输出 10.x.x
-   ```
-
-4. **安装 .NET Android 工作负载**（命令行补充安装，确保完整）
-   ```bash
-   dotnet workload install android
-   ```
-
-5. **重新打开 Visual Studio**，在解决方案资源管理器中右键项目 → **重新加载项目**，即可消除红色错误。
+3. 完成上方的前置步骤后，**重新打开 Visual Studio** → 右键项目 → **重新加载项目**。
 
 ---
 
-### 方式二：命令行（跨平台 / macOS / Linux）
+### 方式三：命令行（跨平台 / macOS / Linux）
 
 ```bash
-# 1. 安装 .NET 10 SDK（见上方下载链接）
-
-# 2. 安装 Android workload
-dotnet workload install android
-
-# 3. 进入项目目录并构建
+# 完成前置步骤后直接构建：
 cd src/AndroidSample.Avalonia
 dotnet build -f net10.0-android
 ```
@@ -74,8 +105,6 @@ dotnet build -f net10.0-android
 | 推荐 API 级别 | API 35（Android 15） |
 | 构建工具 | 由 .NET Android workload 自动管理 |
 
-Visual Studio 安装 ".NET MAUI 开发" 工作负载后会自动下载并配置 Android SDK，无需手动安装。
-
 ## 构建与运行
 
 ```bash
@@ -89,15 +118,16 @@ dotnet build -f net10.0-android
 dotnet run -f net10.0-android
 ```
 
-在 Visual Studio 中也可直接按 **F5** 或点击工具栏的运行按钮，选择目标设备后部署。
+在 Rider 或 Visual Studio 中也可直接按 **F5** 或点击工具栏的运行按钮，选择目标设备后部署。
 
 ## 常见问题排查
 
 | 现象 | 原因 | 解决方法 |
 |------|------|----------|
-| 打开项目后大量红色波浪线 | 未安装 .NET Android workload | 执行 `dotnet workload install android` 后重启 VS |
-| "无法解析 Android.xxx 命名空间" | Android workload 缺失或 SDK 路径未配置 | 通过 VS Installer 重新安装 ".NET MAUI 开发" 工作负载 |
+| 打开项目后大量红色波浪线 | 未安装 .NET Android workload | 执行 `dotnet workload install android` 后重启 IDE |
+| "无法解析 Android.xxx 命名空间" | Android workload 缺失或 SDK 路径未配置 | 重新执行 workload 安装；Rider 用户需在设置中配置 Android SDK 路径 |
 | `TargetFramework net10.0-android` 不被识别 | .NET SDK 版本过低（低于 10） | 升级至 .NET 10 SDK |
+| Rider 中 Android SDK 路径为空 | 未安装 Android Studio 或未配置路径 | 安装 Android Studio 或在 Rider 设置 → Android 页面手动指定 SDK 路径 |
 | 找不到 Android 设备 | 未开启 USB 调试 / 驱动未安装 | 在设备"开发者选项"中开启 USB 调试，并安装 OEM USB 驱动 |
 | 模拟器启动失败 | Hyper-V / HAXM 未启用 | 在 BIOS 中开启 Intel VT-x/AMD-V，并启用 Windows Hyper-V 功能 |
 
