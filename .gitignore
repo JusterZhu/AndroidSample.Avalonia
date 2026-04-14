@@ -1,0 +1,64 @@
+# .NET build artifacts
+bin/
+obj/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.packagespec.json
+*.nuget.props
+*.nuget.targets
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# JetBrains Rider / IntelliJ
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Android build outputs
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Android local properties (contains SDK/NDK paths)
+local.properties
+
+# Log files
+*.log
+
+# OS-specific files
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Publish output
+publish/
