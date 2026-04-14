@@ -29,13 +29,37 @@
 
 ### 设置 JAVA_HOME（重要）
 
-安装 JDK 17 后，必须将 `JAVA_HOME` 环境变量指向该 JDK，否则构建工具可能仍会使用系统中旧版 JDK。
+> ⚠️ **仅将 JDK 17 加入 `PATH` 是不够的。**  
+> MSBuild 通过 `JAVA_HOME` 环境变量定位 JDK，而不是通过 `PATH`。即使 `java -version` 显示 17，  
+> 若 `JAVA_HOME` 未设置或仍指向旧版 JDK，构建依然会报 `UnsupportedClassVersionError`。
 
-**Windows（PowerShell，永久生效）**
+安装 JDK 17（推荐 [Eclipse Temurin](https://adoptium.net/)）后，按以下步骤设置 `JAVA_HOME`：
+
+**Windows — 第一步：找到 JDK 17 安装路径**
+
+打开 PowerShell，执行以下命令找到 JDK 17 的实际路径：
 ```powershell
-[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Microsoft\jdk-17.0.x.x-hotspot", "User")
-$env:JAVA_HOME = "C:\Program Files\Microsoft\jdk-17.0.x.x-hotspot"
+# 方法一：查找 Eclipse Adoptium / Temurin 安装目录（最常见）
+Get-ChildItem "C:\Program Files\Eclipse Adoptium" -ErrorAction SilentlyContinue
+
+# 方法二：通过 java.exe 路径反推 JDK 目录
+(Get-Command java).Source   # 例如：C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot\bin\java.exe
+# JDK 目录即去掉末尾的 \bin\java.exe：C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot
 ```
+
+**Windows — 第二步：永久设置 JAVA_HOME（PowerShell，用实际路径替换）**
+```powershell
+# 将下面路径替换为上一步查到的 JDK 17 目录
+$jdk17 = "C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot"
+
+# 永久写入当前用户的环境变量
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", $jdk17, "User")
+
+# 在当前 PowerShell 会话中立即生效
+$env:JAVA_HOME = $jdk17
+```
+
+> **也可以用图形界面设置**：开始菜单 → 搜索"编辑系统环境变量" → 用户变量 → 新建，变量名 `JAVA_HOME`，值填 JDK 17 目录路径，确定后**重启 IDE 和命令行**。
 
 **macOS / Linux（bash/zsh，追加到 `~/.bashrc` 或 `~/.zshrc`）**
 ```bash
@@ -44,10 +68,16 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 17)   # macOS
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ```
 
-设置完成后，打开新终端并验证版本：
+**第三步：验证设置（重新打开终端后执行）**
+```powershell
+# Windows PowerShell — JAVA_HOME 和 java.exe 都应显示 17
+echo $env:JAVA_HOME
+& "$env:JAVA_HOME\bin\java" -version
+```
 ```bash
-java -version   # 应显示 openjdk 17...
-echo $JAVA_HOME # 应指向 JDK 17 目录
+# macOS / Linux
+echo $JAVA_HOME
+"$JAVA_HOME/bin/java" -version   # 应显示 openjdk 17...
 ```
 
 项目文件已通过 `<JavaSdkDirectory>$(JAVA_HOME)</JavaSdkDirectory>` 将构建工具显式绑定到 `JAVA_HOME`，可避免多 JDK 环境下的自动检测错误。
