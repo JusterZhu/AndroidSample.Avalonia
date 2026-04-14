@@ -12,6 +12,9 @@ namespace AndroidSample.Avalonia.Views;
 /// </summary>
 public partial class ContactsView : UserControl
 {
+    // ContactsContract.CommonDataKinds.Phone.NUMBER = "data1" (InterfaceConsts.Number was removed in newer .NET Android bindings)
+    private const string PhoneNumberColumn = "data1";
+
     private readonly MainView _main;
 
     public ContactsView(MainView main)
@@ -32,7 +35,7 @@ public partial class ContactsView : UserControl
             string[] projection =
             {
                 ContactsContract.CommonDataKinds.Phone.InterfaceConsts.DisplayName,
-                ContactsContract.CommonDataKinds.Phone.InterfaceConsts.Number
+                PhoneNumberColumn
             };
 
             using var cursor = ctx.ContentResolver!.Query(uri, projection, null, null,

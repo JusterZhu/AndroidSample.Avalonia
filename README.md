@@ -25,6 +25,32 @@
 - .NET 10 SDK
 - `dotnet workload install android`
 - Android SDK (API 21+, 推荐 API 35)
+- **JDK 17 或更高版本**（manifest merger 工具需要 Java 17；若使用 JDK 11 及以下则会报 `UnsupportedClassVersionError`）
+
+### 设置 JAVA_HOME（重要）
+
+安装 JDK 17 后，必须将 `JAVA_HOME` 环境变量指向该 JDK，否则构建工具可能仍会使用系统中旧版 JDK。
+
+**Windows（PowerShell，永久生效）**
+```powershell
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Microsoft\jdk-17.0.x.x-hotspot", "User")
+$env:JAVA_HOME = "C:\Program Files\Microsoft\jdk-17.0.x.x-hotspot"
+```
+
+**macOS / Linux（bash/zsh，追加到 `~/.bashrc` 或 `~/.zshrc`）**
+```bash
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)   # macOS
+# 或（Linux）
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+```
+
+设置完成后，打开新终端并验证版本：
+```bash
+java -version   # 应显示 openjdk 17...
+echo $JAVA_HOME # 应指向 JDK 17 目录
+```
+
+项目文件已通过 `<JavaSdkDirectory>$(JAVA_HOME)</JavaSdkDirectory>` 将构建工具显式绑定到 `JAVA_HOME`，可避免多 JDK 环境下的自动检测错误。
 
 ## 构建与运行
 
